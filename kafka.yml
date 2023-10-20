@@ -89,5 +89,4 @@ services:
       - 19000:9000
     environment:
       KAFKA_BROKERCONNECT: kafka1:9092,kafka2:9093,kafka3:9094
-    volumes:
-      - "/etc/timezone:/etc/timezone:ro"
+      TZ: "Asia/Bangkok"
