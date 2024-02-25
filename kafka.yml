@@ -12,8 +12,8 @@ services:
         ZOOKEEPER_CLIENT_PORT: 2181
         ZOOKEEPER_TICK_TIME: 2000
     volumes:
-      - ./data/zoo1/data:/data
-      - ./data/zoo1/datalog:/datalog
+      - ./data/zookeeper-1/data:/var/lib/zookeeper/data
+      - ./data/zookeeper-1/log:/var/lib/zookeeper/log
 
   kafka-1:
     image: confluentinc/cp-kafka:7.6.0
@@ -31,7 +31,7 @@ services:
       KAFKA_LOG_RETENTION_HOURS: 72
       KAFKA_SEGMENT_BYTES: 100000000
     volumes:
-      - ./data/kafka1/data:/var/lib/kafka/data
+      - ./data/kafka-1/data:/var/lib/kafka/data
     depends_on:
       - zookeeper-1
 
@@ -51,7 +51,7 @@ services:
       KAFKA_LOG_RETENTION_HOURS: 72
       KAFKA_SEGMENT_BYTES: 100000000
     volumes:
-      - ./data/kafka2/data:/var/lib/kafka/data
+      - ./data/kafka-2/data:/var/lib/kafka/data
     depends_on:
       - zookeeper-1
 
@@ -71,7 +71,7 @@ services:
       KAFKA_LOG_RETENTION_HOURS: 72
       KAFKA_SEGMENT_BYTES: 100000000
     volumes:
-      - ./data/kafka3/data:/var/lib/kafka/data
+      - ./data/kafka-3/data:/var/lib/kafka/data
     depends_on:
       - zookeeper-1
   kafdrop:
@@ -85,3 +85,6 @@ services:
     environment:
       KAFKA_BROKERCONNECT: kafka-1:9092,kafka-2:9093,kafka-3:9094
       TZ: "Asia/Bangkok"
+  confluent-cli:
+    image: confluentinc/confluent-cli:latest
+    container_name: confluent-cli
