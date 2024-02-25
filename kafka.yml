@@ -33,7 +33,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_DEFAULT_REPLICATION_FACTOR: 3
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
-      KAFKA_LOG_RETENTION_HOURS: 12
+      KAFKA_LOG_RETENTION_HOURS: 72
       KAFKA_SEGMENT_BYTES: 100000000
     volumes:
       - ./data/kafka1/data:/var/lib/kafka/data
@@ -55,7 +55,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_DEFAULT_REPLICATION_FACTOR: 3
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
-      KAFKA_LOG_RETENTION_HOURS: 12
+      KAFKA_LOG_RETENTION_HOURS: 72
       KAFKA_SEGMENT_BYTES: 100000000
     volumes:
       - ./data/kafka2/data:/var/lib/kafka/data
@@ -77,7 +77,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
       KAFKA_DEFAULT_REPLICATION_FACTOR: 3
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
-      KAFKA_LOG_RETENTION_HOURS: 12
+      KAFKA_LOG_RETENTION_HOURS: 72
       KAFKA_SEGMENT_BYTES: 100000000
     volumes:
       - ./data/kafka3/data:/var/lib/kafka/data
