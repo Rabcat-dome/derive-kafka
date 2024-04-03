@@ -2,6 +2,7 @@ version: '2.1'
 services:
   zookeeper-1:
     image: confluentinc/cp-zookeeper:7.6.0
+    user: "0:0"
     hostname: zookeeper-1
     container_name: zookeeper-1
     restart: always
@@ -17,13 +18,16 @@ services:
 
   kafka-1:
     image: confluentinc/cp-kafka:7.6.0
+    user: "0:0"
     hostname: kafka-1
     container_name: kafka-1
     restart: always
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-1:9092
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka-1:19092,LISTENER_DOCKER_EXTERNAL://172.19.100.76:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper-1:2181"
       KAFKA_BROKER_ID: 1
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
@@ -37,13 +41,16 @@ services:
 
   kafka-2:
     image: confluentinc/cp-kafka:7.6.0
+    user: "0:0"
     hostname: kafka-2
     container_name: kafka-2
     restart: always
     ports:
       - "9093:9093"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:9093
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka-2:19093,LISTENER_DOCKER_EXTERNAL://172.19.100.76:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper-1:2181"
       KAFKA_BROKER_ID: 2
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
@@ -57,13 +64,16 @@ services:
 
   kafka-3:
     image: confluentinc/cp-kafka:7.6.0
+    user: "0:0"
     hostname: kafka-3
     container_name: kafka-3
     restart: always
     ports:
       - "9094:9094"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:9094
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka-3:19094,LISTENER_DOCKER_EXTERNAL://172.19.100.76:9094
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper-1:2181"
       KAFKA_BROKER_ID: 3
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
@@ -85,6 +95,3 @@ services:
     environment:
       KAFKA_BROKERCONNECT: kafka-1:9092,kafka-2:9093,kafka-3:9094
       TZ: "Asia/Bangkok"
-  confluent-cli:
-    image: confluentinc/confluent-cli:latest
-    container_name: confluent-cli
