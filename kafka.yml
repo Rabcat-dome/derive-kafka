@@ -22,7 +22,7 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.hostname == worker-1
+          - node.hostname == master-1
 
   kafka-1:
     image: confluentinc/cp-kafka:7.6.0
