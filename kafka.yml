@@ -123,8 +123,8 @@ services:
 
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
-    ports:
-      - 19000:9000
+    # ports:
+    #   - 19000:9000
     depends_on:
       - kafka-1
       - kafka-2
@@ -144,6 +144,13 @@ services:
       placement:
         constraints:
           - node.role == manager
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.my_service.rule=PathPrefix(`/kafdrop`)"
+        - "traefik.http.middlewares.kafdrop-strip.stripprefix.prefixes=/kafdrop"
+        - "traefik.http.routers.kafdrop.middlewares=kafdrop-strip"
+        - "traefik.http.services.my_service.loadbalancer.server.port=9000"
+        - "traefik.docker.network=traefik-public"
 
 volumes:
   zookeeper-data:
@@ -160,3 +167,5 @@ volumes:
 networks:
   derive-network:
     driver: overlay
+  traefik-public:
+    external: true
