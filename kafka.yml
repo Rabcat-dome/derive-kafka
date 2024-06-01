@@ -134,6 +134,7 @@ services:
       TZ: "Asia/Bangkok"
     networks:
       - derive-network
+      - traefik-public
     deploy:
       replicas: 1
       restart_policy:
