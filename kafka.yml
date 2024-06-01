@@ -134,7 +134,7 @@ services:
       TZ: "Asia/Bangkok"
     networks:
       - derive-network
-      - traefik-public
+      - traefik_traefik-public
     deploy:
       replicas: 1
       restart_policy:
@@ -151,7 +151,7 @@ services:
         - "traefik.http.middlewares.kafdrop-strip.stripprefix.prefixes=/kafdrop"
         - "traefik.http.routers.kafdrop.middlewares=kafdrop-strip"
         - "traefik.http.services.my_service.loadbalancer.server.port=9000"
-        - "traefik.docker.network=traefik-public"
+        - "traefik.docker.network=traefik_traefik-public"
 
 volumes:
   zookeeper-data:
@@ -168,5 +168,5 @@ volumes:
 networks:
   derive-network:
     driver: overlay
-  traefik-public:
+  traefik_traefik-public:
     external: true
