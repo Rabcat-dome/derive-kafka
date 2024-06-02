@@ -149,8 +149,6 @@ services:
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.kafdrop.rule=PathPrefix(`/kafdrop`)"
-        - "traefik.http.middlewares.kafdrop-strip.stripprefix.prefixes=/kafdrop"
-        - "traefik.http.routers.kafdrop.middlewares=kafdrop-strip"
         - "traefik.http.services.kafdrop.loadbalancer.server.port=9000"
         - "traefik.docker.network=traefik_traefik-public"
 
