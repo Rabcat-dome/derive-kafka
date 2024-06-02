@@ -132,6 +132,7 @@ services:
     environment:
       KAFKA_BROKERCONNECT: kafka_kafka-1:9092,kafka_kafka-2:9093,kafka_kafka-3:9094
       TZ: "Asia/Bangkok"
+      SERVER_SERVLET_CONTEXTPATH: "/kafdrop"
     networks:
       - derive-network
       - traefik_traefik-public
@@ -147,10 +148,10 @@ services:
           - node.role == manager
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.my_service.rule=PathPrefix(`/kafdrop`)"
+        - "traefik.http.routers.kafdrop.rule=PathPrefix(`/kafdrop`)"
         - "traefik.http.middlewares.kafdrop-strip.stripprefix.prefixes=/kafdrop"
         - "traefik.http.routers.kafdrop.middlewares=kafdrop-strip"
-        - "traefik.http.services.my_service.loadbalancer.server.port=9000"
+        - "traefik.http.services.kafdrop.loadbalancer.server.port=9000"
         - "traefik.docker.network=traefik_traefik-public"
 
 volumes:
