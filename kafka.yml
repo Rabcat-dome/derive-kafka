@@ -22,7 +22,8 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.hostname == master-1
+          # - node.hostname == master-1
+          - node.role == manager
 
   kafka-1:
     image: confluentinc/cp-kafka:7.6.0
@@ -54,7 +55,8 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.hostname == worker-1
+          # - node.hostname == worker-1
+          - node.role == worker
 
   kafka-2:
     image: confluentinc/cp-kafka:7.6.0
@@ -86,7 +88,8 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.hostname == worker-1
+          # - node.hostname == worker-1
+          - node.role == worker
 
   kafka-3:
     image: confluentinc/cp-kafka:7.6.0
@@ -119,7 +122,8 @@ services:
         window: 120s
       placement:
         constraints:
-          - node.hostname == worker-2
+          # - node.hostname == worker-2
+          - node.role == worker
 
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
@@ -155,14 +159,34 @@ services:
 volumes:
   zookeeper-data:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /media/psf/NFS/zookeeper-data
   zookeeper-log:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /media/psf/NFS/zookeeper-log
   kafka-1-data:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /media/psf/NFS/kafka-1-data
   kafka-2-data:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /media/psf/NFS/kafka-2-data
   kafka-3-data:
     driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /media/psf/NFS/kafka-3-data
 
 networks:
   derive-network:
