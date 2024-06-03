@@ -2,8 +2,8 @@ services:
   zookeeper-1:
     image: confluentinc/cp-zookeeper:7.6.0
     user: "0:0"
-    ports:
-      - "2181:2181"
+    # ports:
+    #   - "2181:2181"
     environment:
         ZOO_MY_ID: 1
         ZOOKEEPER_CLIENT_PORT: 2181
