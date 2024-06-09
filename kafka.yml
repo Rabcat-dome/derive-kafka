@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   zookeeper-1:
-    image: confluentinc/cp-zookeeper:7.6.0
+    image: confluentinc/cp-zookeeper:7.6.1
     user: "0:0"
     hostname: zookeeper-1
     container_name: zookeeper-1
@@ -17,7 +17,7 @@ services:
       - ./data/zookeeper-1/log:/var/lib/zookeeper/log
 
   kafka-1:
-    image: confluentinc/cp-kafka:7.6.0
+    image: confluentinc/cp-kafka:7.6.1
     user: "0:0"
     hostname: kafka-1
     container_name: kafka-1
@@ -40,7 +40,7 @@ services:
       - zookeeper-1
 
   kafka-2:
-    image: confluentinc/cp-kafka:7.6.0
+    image: confluentinc/cp-kafka:7.6.1
     user: "0:0"
     hostname: kafka-2
     container_name: kafka-2
@@ -63,7 +63,7 @@ services:
       - zookeeper-1
 
   kafka-3:
-    image: confluentinc/cp-kafka:7.6.0
+    image: confluentinc/cp-kafka:7.6.1
     user: "0:0"
     hostname: kafka-3
     container_name: kafka-3
@@ -84,6 +84,7 @@ services:
       - ./data/kafka-3/data:/var/lib/kafka/data
     depends_on:
       - zookeeper-1
+      
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
     ports:
