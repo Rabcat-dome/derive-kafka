@@ -1,6 +1,6 @@
 services:
   zookeeper-1:
-    image: confluentinc/cp-zookeeper:7.6.0
+    image: confluentinc/cp-zookeeper:7.6.1
     user: "0:0"
     # ports:
     #   - "2181:2181"
@@ -26,7 +26,7 @@ services:
           - node.role == manager
 
   kafka-1:
-    image: confluentinc/cp-kafka:7.6.0
+    image: confluentinc/cp-kafka:7.6.1
     user: "0:0"
     ports:
       - "9092:9092"
@@ -59,7 +59,7 @@ services:
           - node.role == worker
 
   kafka-2:
-    image: confluentinc/cp-kafka:7.6.0
+    image: confluentinc/cp-kafka:7.6.1
     user: "0:0"
     ports:
       - "9093:9093"
@@ -92,7 +92,7 @@ services:
           - node.role == worker
 
   kafka-3:
-    image: confluentinc/cp-kafka:7.6.0
+    image: confluentinc/cp-kafka:7.6.1
     user: "0:0"
     restart: always
     ports:
